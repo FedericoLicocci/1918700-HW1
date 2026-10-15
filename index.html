@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW1 - Elliptic Curve Scalar Multiplication (Toy Curve)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>HW1: Public-Key Cryptography in Ethereum (Toy Curve)</h1>
+        <p class="subtitle">Demonstration of scalar multiplication $Q = kG$ and Statistical Analysis on $y^2 = x^3 + 7 \pmod{17}$</p>
+
+        <div class="controls-card">
+            <div class="inputs-inline">
+                <div class="input-group">
+                    <label for="scalar-k">Private Key (k):</label>
+                    <input type="number" id="scalar-k" value="6" min="1" max="50">
+                </div>
+                <div class="input-group">
+                    <label for="input-gx">Base Point G (x):</label>
+                    <input type="number" id="input-gx" value="1" min="0" max="16">
+                </div>
+                <div class="input-group">
+                    <label for="input-gy">Base Point G (y):</label>
+                    <input type="number" id="input-gy" value="5" min="0" max="16">
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="btn-calculate" class="btn primary">Calculate Sequence</button>
+                <button id="btn-animate" class="btn secondary">Run Animation (Guru)</button>
+                <button id="btn-stats" class="btn accent">Run Statistical Analysis</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="canvas-container">
+                <canvas id="ec-canvas" width="450" height="450"></canvas>
+                <div class="canvas-legend">Curve: $y^2 = x^3 + 7 \pmod{17}$ | Default $G = (1, 5)$</div>
+            </div>
+
+            <div class="log-container">
+                <h2>Operations Log & Statistical Report</h2>
+                <div id="log-output" class="log-box">
+                    Select k and the coordinates of G, then click an operation to view the results...
+                </div>
+            </div>
+        </div>
+
+        <div class="discussion-section">
+            <h2>Discussion & Statistical Observations (HW1)</h2>
+            <p class="discussion-hint">Notes and reflections on the homework requirements (feel free to edit):</p>
+            <textarea id="discussion-text" rows="7">1. Distribution and Frequency: Coordinates (x, y) are not uniformly distributed across the plane, but constrained by the curve geometry y^2 = x^3 + 7 (mod 17).
+2. Torsion and Cyclicity: Point (3,0) represents an isolated 2-torsion point (y=0 with no vertical mirror symmetry). Generated points form finite cyclic subgroups (e.g., order 9 for G=(1,5)).
+3. Avalanche Effect & Correlation: There is no true bit-by-bit avalanche effect. Scalar multiplication preserves strict algebraic and geometric continuity (Q = Q_old + G).
+4. One-Way Function vs Hash: The difficulty of the ECDLP ensures asymmetric forward security while preserving the algebraic group structure (essential for elliptic curves). Hash functions (e.g., Keccak) instead require total structural destruction and a strict avalanche effect.</textarea>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
